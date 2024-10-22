@@ -10,6 +10,9 @@ export default {
         PTSans: ['PT Sans', 'sans-serif'],
       }
     },
+    // colors: {
+    //   transparentWhite: 'rgba(255, 255, 255, 0.02)'
+    // }
   },
   plugins: [],
 }
