@@ -19,6 +19,9 @@ export default function SetTimerPage(){
     const [showSetTime, setShowSetTime] = useState(true)
     const [analogOpen, setAnalogOpen] = useState(false)
 
+    const handleReset = () => {
+        setShowTimesUp(false)
+    }
     function handleSetTimeOpen() {
         setShowSetTime(!showSetTime)
     }
@@ -26,7 +29,7 @@ export default function SetTimerPage(){
         setAnalogOpen(!analogOpen)
     }
 
-    //Helper functions
+    //Time helper functions
     const handleIncrement = () => {
         setTime(time + 5)
     }
@@ -79,12 +82,10 @@ export default function SetTimerPage(){
     const handleStop = () => {
         timer.stop()
     }
-  
-    
     
     const countDown = timer.getTimeValues().toString()    
     
-
+    //Animation to highlight when user changes number
     const blinkVariants = {
         visible: {
           opacity: 1,
@@ -97,10 +98,7 @@ export default function SetTimerPage(){
       };
 
 
-    const handleReset = () => {
-        
-        setShowTimesUp(false)
-    }
+
 
     return (
         <motion.div 
@@ -110,7 +108,12 @@ export default function SetTimerPage(){
             transition={{duration: 0.01}}
         >
             {timer ? <p className='absolute text-white'>{countDown}</p> : null}
-            {showTimesUp ? <TimesUp handleReset={handleReset} /> : null}
+            {showTimesUp ? 
+                <TimesUp 
+                    handleReset={handleReset} 
+                    handleAnalogOpen={handleAnalogOpen} 
+                    handleSetTimeOpen={handleSetTimeOpen}
+                /> : null}
         <main className='min-w-[375px] mx-auto  bg-gray-50 shadow-2xl flex flex-col items-center justify-center gap-y-16 relative'>
             <Menu 
                 handleAnalogOpen={handleAnalogOpen} 

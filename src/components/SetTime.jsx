@@ -1,10 +1,6 @@
-// import Menu from '../components/Menu'
 import ArrowLeft from '../assets/arrowLeft.svg'
 import ArrowRight from '../assets/arrowRight.svg'
-// import {useState, useEffect} from 'react'
-// import useTimer from 'easytimer-react-hook'
 import {motion} from 'framer-motion'
-// import TimesUp from '../components/TimesUp'
 
 export default function SetTimerPage(props){
 

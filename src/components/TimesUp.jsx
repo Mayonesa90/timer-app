@@ -1,7 +1,7 @@
 import Alarm from '../assets/alarm.svg'
 import {motion} from 'framer-motion'
 
-export default function TimesUp({handleReset}){
+export default function TimesUp({handleReset, handleAnalogOpen, handleSetTimeOpen}){
     
     const rippleVariants = {
         animate: {
@@ -16,6 +16,12 @@ export default function TimesUp({handleReset}){
                 repeatType: "reverse"
             },
         },
+    }
+
+    const handleClick = () => {
+        handleReset()
+        handleAnalogOpen()
+        handleSetTimeOpen()
     }
 
     return (
@@ -45,7 +51,7 @@ export default function TimesUp({handleReset}){
                     initial={{scale: 1}}
                     whileTap={{scale: 0.95}}
                     transition={{duration: 0.1, ease: 'easeIn'}}  
-                    onClick={handleReset}      
+                    onClick={handleClick}      
             >
                 SET NEW TIMER
             </motion.button>
