@@ -9,7 +9,6 @@ import LogoHorizontalWhite from '../assets/logoHorizontalWhite.svg'
 export default function Menu({analogOpen, digitalOpen, showSetTime, handleAnalogOpen, handleSetTimeOpen, handleDigitalOpen}){
 
     const [menuOpen, setMenuOpen] = useState(false) 
-    console.log('menuOpen: ', menuOpen);
     
     function toggleMenu(){
         setMenuOpen(!menuOpen)

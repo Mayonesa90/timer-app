@@ -20,11 +20,6 @@ export default function SetTimerPage(){
     const [showSetTime, setShowSetTime] = useState(true)
     const [analogOpen, setAnalogOpen] = useState(false)
     const [digitalOpen, setDigitalOpen] = useState(false)
-    console.log('showSetTime: ', showSetTime);
-    console.log('analogOpen: ', analogOpen);
-    console.log('digitalOpen: ', digitalOpen);
-    
-    
     
     const handleReset = () => {
         setShowTimesUp(false)
@@ -120,9 +115,13 @@ export default function SetTimerPage(){
             {timer ? <p className='absolute text-white'>{countDown}</p> : null}
             {showTimesUp ? 
                 <TimesUp 
+                    analogOpen={analogOpen}
+                    digitalOpen={digitalOpen}
+                    showSetTime={showSetTime}
                     handleReset={handleReset} 
                     handleAnalogOpen={handleAnalogOpen} 
                     handleSetTimeOpen={handleSetTimeOpen}
+                    handleDigitalOpen={handleDigitalOpen}
                 /> : null}
         <main className='min-w-[375px] mx-auto  bg-gray-50 shadow-2xl flex flex-col items-center justify-center gap-y-16 relative'>
             <Menu 
@@ -154,7 +153,6 @@ export default function SetTimerPage(){
                     countDown={countDown}
                     handleDigitalOpen={handleDigitalOpen}
                     handleStop={handleStop}
-                    handleAnalogOpen={handleAnalogOpen} 
                     handleSetTimeOpen={handleSetTimeOpen}
                 /> : null}
         </main>
