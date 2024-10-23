@@ -5,6 +5,7 @@ import {motion} from 'framer-motion'
 import TimesUp from '../components/TimesUp'
 import SetTime from '../components/SetTime'
 import Analog from '../components/Analog'
+import Digital from '../components/Digital'
 
 export default function SetTimerPage(){
 
@@ -18,7 +19,13 @@ export default function SetTimerPage(){
     const [showTimesUp, setShowTimesUp] = useState(false)
     const [showSetTime, setShowSetTime] = useState(true)
     const [analogOpen, setAnalogOpen] = useState(false)
-
+    const [digitalOpen, setDigitalOpen] = useState(false)
+    console.log('showSetTime: ', showSetTime);
+    console.log('analogOpen: ', analogOpen);
+    console.log('digitalOpen: ', digitalOpen);
+    
+    
+    
     const handleReset = () => {
         setShowTimesUp(false)
     }
@@ -27,6 +34,9 @@ export default function SetTimerPage(){
     }
     function handleAnalogOpen() {
         setAnalogOpen(!analogOpen)
+    }
+    function handleDigitalOpen() {
+        setDigitalOpen(!digitalOpen)
     }
 
     //Time helper functions
@@ -116,8 +126,12 @@ export default function SetTimerPage(){
                 /> : null}
         <main className='min-w-[375px] mx-auto  bg-gray-50 shadow-2xl flex flex-col items-center justify-center gap-y-16 relative'>
             <Menu 
+                analogOpen={analogOpen}
+                digitalOpen={digitalOpen}
+                showSetTime={showSetTime}
                 handleAnalogOpen={handleAnalogOpen} 
                 handleSetTimeOpen={handleSetTimeOpen}
+                handleDigitalOpen={handleDigitalOpen}
             />
             {showSetTime ? 
                 <SetTime 
@@ -134,6 +148,14 @@ export default function SetTimerPage(){
                     handleAnalogOpen={handleAnalogOpen} 
                     handleSetTimeOpen={handleSetTimeOpen}
                     handleStop={handleStop}
+                /> : null}
+            {digitalOpen ?
+                <Digital
+                    countDown={countDown}
+                    handleDigitalOpen={handleDigitalOpen}
+                    handleStop={handleStop}
+                    handleAnalogOpen={handleAnalogOpen} 
+                    handleSetTimeOpen={handleSetTimeOpen}
                 /> : null}
         </main>
       </motion.div>

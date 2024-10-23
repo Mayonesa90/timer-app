@@ -1,17 +1,20 @@
 import {motion} from 'framer-motion'
 
-export default function Analog({countDown, handleAnalogOpen, handleSetTimeOpen, handleStop}) { 
+export default function Analog({countDown, handleDigitalOpen, handleStop, handleSetTimeOpen}) { 
 
     const handleClick = () => {
-        handleAnalogOpen()
-        handleSetTimeOpen()
+        handleDigitalOpen()
         handleStop()
+        handleSetTimeOpen()
     }
    
     return (
+       
         <main className='min-w-[375px] mx-auto  bg-gray-50 shadow-2xl flex flex-col items-center justify-center gap-y-16 relative'>
             <section className='flex gap-[42px] items-center'>
-               I'm analog
+                <h1 className=' font-PTSans text-[80px] font-semibold'>
+                    {countDown}
+                </h1>
             </section>
             <section className='flex flex-col gap-y-4'>
                 <motion.button 
@@ -22,6 +25,6 @@ export default function Analog({countDown, handleAnalogOpen, handleSetTimeOpen, 
                     onClick={handleClick}
                 >ABORT TIMER</motion.button>
             </section>
-        </main>
+         </main>
     );
 }

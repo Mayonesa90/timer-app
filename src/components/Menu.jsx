@@ -6,10 +6,11 @@ import LogoHorizontalBlack from '../assets/logoHorizontalBlack.svg'
 import LogoHorizontalWhite from '../assets/logoHorizontalWhite.svg'
 
 
-export default function Menu({handleAnalogOpen, handleSetTimeOpen}){
+export default function Menu({analogOpen, digitalOpen, showSetTime, handleAnalogOpen, handleSetTimeOpen, handleDigitalOpen}){
 
     const [menuOpen, setMenuOpen] = useState(false) 
-
+    console.log('menuOpen: ', menuOpen);
+    
     function toggleMenu(){
         setMenuOpen(!menuOpen)
     }
@@ -26,10 +27,38 @@ export default function Menu({handleAnalogOpen, handleSetTimeOpen}){
     }
 
     const handleAnalogClick = () => {
-        handleAnalogOpen()
-        handleSetTimeOpen()
         toggleMenu()
+
+        if(!analogOpen){
+            handleAnalogOpen()
+        }
+
+        if(digitalOpen){
+            handleDigitalOpen()
+        }
+
+        if(showSetTime){
+            handleSetTimeOpen()
+        }
     }
+
+    const handleDigitalClick = () => {
+        toggleMenu()
+
+        if(!digitalOpen){
+            handleDigitalOpen()
+        }
+
+        if(analogOpen){
+            handleAnalogOpen()
+        }
+
+        if(showSetTime){
+            handleSetTimeOpen()
+        }
+
+    }
+
 
     return (
         <AnimatePresence>
@@ -45,7 +74,13 @@ export default function Menu({handleAnalogOpen, handleSetTimeOpen}){
                 <img src={LogoHorizontalWhite} onClick={toggleMenu}alt="logo" className='w-9 pt-3 ml-4 absolute top-3 ' />
                 <ul className=' font-PTSans tracking-widest font-bold text-2xl text-gray-50 flex flex-col gap-8 '>
                     <li onClick={handleAnalogClick} className='hover:cursor-pointer'>ANALOG TIMER</li>
-                    <li>DIGITAL TIMER</li>
+                    <li onClick={handleDigitalClick} className='hover:cursor-pointer'>DIGITAL TIMER</li>
+                    {/* <li onClick={() => handleMenuClick('analog')} className='hover:cursor-pointer'>
+                        ANALOG TIMER
+                    </li>
+                    <li onClick={() => handleMenuClick('digital')} className='hover:cursor-pointer'>
+                        DIGITAL TIMER
+                    </li> */}
                     <li>VISUAL TIMER</li>
                     <li>TEXT TIMER</li>
                     <li>CIRCLES TIMER</li>
@@ -53,15 +88,15 @@ export default function Menu({handleAnalogOpen, handleSetTimeOpen}){
             </motion.nav>
         ) : (
             <motion.nav 
-            className='hover:cursor-pointer menu-closed min-w-[375px] bg-gray-50 shadow-2xl absolute top-3'
-            key={'menu-closed'}
-            initial='closed'
-            animate='open'
-            exit='closed'
-            variants={menuVariants}
+                className='hover:cursor-pointer menu-closed min-w-[375px] bg-gray-50 shadow-2xl absolute top-3'
+                key={'menu-closed'}
+                initial='closed'
+                animate='open'
+                exit='closed'
+                variants={menuVariants}
             >
-            <img src={LogoHorizontalBlack} onClick={toggleMenu} alt="logo" className='w-9 pt-3  ml-4 absolute ' />
-            <h1 className=' tracking-widest text-gray-400 text-xl font-RighteousFont absolute top-3 left-[40%]'>interval</h1>
+                <img src={LogoHorizontalBlack} onClick={toggleMenu} alt="logo" className='w-9 pt-3  ml-4 absolute ' />
+                <h1 className=' tracking-widest text-gray-400 text-xl font-RighteousFont absolute top-3 left-[40%]'>interval</h1>
             </motion.nav>
         )
             }
