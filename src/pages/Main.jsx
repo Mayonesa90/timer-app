@@ -6,6 +6,7 @@ import TimesUp from '../components/TimesUp'
 import SetTime from '../components/SetTime'
 import Analog from '../components/Analog'
 import Digital from '../components/Digital'
+import Text from '../components/Text'
 
 export default function SetTimerPage(){
 
@@ -20,6 +21,7 @@ export default function SetTimerPage(){
     const [showSetTime, setShowSetTime] = useState(true)
     const [analogOpen, setAnalogOpen] = useState(false)
     const [digitalOpen, setDigitalOpen] = useState(false)
+    const [textOpen, setTextOpen] = useState(false)
     
     const handleReset = () => {
         setShowTimesUp(false)
@@ -32,6 +34,9 @@ export default function SetTimerPage(){
     }
     function handleDigitalOpen() {
         setDigitalOpen(!digitalOpen)
+    }
+    function handleTextOpen() {
+        setTextOpen(!textOpen)
     }
 
     //Time helper functions
@@ -89,21 +94,7 @@ export default function SetTimerPage(){
     }
     
     const countDown = timer.getTimeValues().toString()
-    
-    //Animation to highlight when user changes number
-    // const blinkVariants = {
-    //     visible: {
-    //       opacity: 1,
-    //       transition: { duration: 0.2, ease: "easeInOut" }, // Duration of the blink
-    //     },
-    //     hidden: {
-    //       opacity: 0,
-    //       transition: { duration: 0.2, ease: "easeInOut" },
-    //     },
-    //   };
 
-
-    //Animation logic to analog clock
 
     let totalDurationInSeconds = time * 60
    
@@ -122,19 +113,23 @@ export default function SetTimerPage(){
                     analogOpen={analogOpen}
                     digitalOpen={digitalOpen}
                     showSetTime={showSetTime}
+                    textOpen={textOpen}
                     handleReset={handleReset} 
                     handleAnalogOpen={handleAnalogOpen} 
                     handleSetTimeOpen={handleSetTimeOpen}
                     handleDigitalOpen={handleDigitalOpen}
+                    handleTextOpen={handleTextOpen}
                 /> : null}
         <main className='min-w-[375px] mx-auto  bg-gray-50 shadow-2xl flex flex-col items-center justify-center gap-y-16 relative'>
             <Menu 
                 analogOpen={analogOpen}
                 digitalOpen={digitalOpen}
+                textOpen={textOpen}
                 showSetTime={showSetTime}
                 handleAnalogOpen={handleAnalogOpen} 
                 handleSetTimeOpen={handleSetTimeOpen}
                 handleDigitalOpen={handleDigitalOpen}
+                handleTextOpen={handleTextOpen}
             />
             {showSetTime ? 
                 <SetTime 
@@ -157,6 +152,13 @@ export default function SetTimerPage(){
                 <Digital
                     countDown={countDown}
                     handleDigitalOpen={handleDigitalOpen}
+                    handleStop={handleStop}
+                    handleSetTimeOpen={handleSetTimeOpen}
+                /> : null}
+            {textOpen ?
+                <Text
+                    countDown={countDown}
+                    handleTextOpen={handleTextOpen}
                     handleStop={handleStop}
                     handleSetTimeOpen={handleSetTimeOpen}
                 /> : null}

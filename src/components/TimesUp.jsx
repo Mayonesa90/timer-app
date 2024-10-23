@@ -1,7 +1,7 @@
 import Alarm from '../assets/alarm.svg'
 import {motion} from 'framer-motion'
 
-export default function TimesUp({analogOpen, digitalOpen, showSetTime, handleReset, handleAnalogOpen, handleSetTimeOpen, handleDigitalOpen}){
+export default function TimesUp({analogOpen, digitalOpen, textOpen, showSetTime, handleReset, handleAnalogOpen, handleSetTimeOpen, handleDigitalOpen, handleTextOpen}){
     
     const rippleVariants = {
         animate: {
@@ -28,6 +28,10 @@ export default function TimesUp({analogOpen, digitalOpen, showSetTime, handleRes
 
         if(digitalOpen){
             handleDigitalOpen()
+        }
+
+        if(textOpen){
+            handleTextOpen()
         }
         
     }

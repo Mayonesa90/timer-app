@@ -1,12 +1,11 @@
 import { useState } from 'react'
 import {motion, AnimatePresence} from 'framer-motion'
-// import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
 
 import LogoHorizontalBlack from '../assets/logoHorizontalBlack.svg'
 import LogoHorizontalWhite from '../assets/logoHorizontalWhite.svg'
 
 
-export default function Menu({analogOpen, digitalOpen, showSetTime, handleAnalogOpen, handleSetTimeOpen, handleDigitalOpen}){
+export default function Menu({analogOpen, digitalOpen, textOpen, showSetTime, handleAnalogOpen, handleSetTimeOpen, handleDigitalOpen, handleTextOpen}){
 
     const [menuOpen, setMenuOpen] = useState(false) 
     
@@ -39,6 +38,10 @@ export default function Menu({analogOpen, digitalOpen, showSetTime, handleAnalog
         if(showSetTime){
             handleSetTimeOpen()
         }
+
+        if(textOpen){
+            handleTextOpen()
+        }
     }
 
     const handleDigitalClick = () => {
@@ -56,14 +59,38 @@ export default function Menu({analogOpen, digitalOpen, showSetTime, handleAnalog
             handleSetTimeOpen()
         }
 
+        if(textOpen){
+            handleTextOpen()
+        }
+
     }
+
+    const handleTextClick = () => {
+        toggleMenu()
+
+        if(analogOpen){
+            handleAnalogOpen()
+        }
+
+        if(showSetTime){
+            handleSetTimeOpen()
+        }
+
+        if(digitalOpen) {
+            handleDigitalOpen()
+        }
+
+        if(!textOpen){
+            handleTextOpen()
+        }
+    }   
 
 
     return (
         <AnimatePresence>
         {menuOpen ? (
             <motion.nav 
-                className='menu-open z-40 min-w-[375px] h-full bg-gray-900 grid items-center justify-center absolute'
+                className='hover:cursor-pointer menu-open z-40 min-w-[375px] h-full bg-gray-900 grid items-center justify-center absolute'
                 key={'menu-open'}
                 initial='closed'
                 animate='open'
@@ -74,7 +101,7 @@ export default function Menu({analogOpen, digitalOpen, showSetTime, handleAnalog
                 <ul className=' font-PTSans tracking-widest font-bold text-2xl text-gray-50 flex flex-col gap-8 '>
                     <li onClick={handleAnalogClick} className='hover:cursor-pointer'>ANALOG TIMER</li>
                     <li onClick={handleDigitalClick} className='hover:cursor-pointer'>DIGITAL TIMER</li>
-                    <li>TEXT TIMER</li>
+                    <li onClick={handleTextClick} className='hover:cursor-pointer'>TEXT TIMER</li>
                     <li>CIRCLES TIMER</li>
                 </ul>
             </motion.nav>
