@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import {motion, AnimatePresence} from 'framer-motion'
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
+// import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
 
 import LogoHorizontalBlack from '../assets/logoHorizontalBlack.svg'
 import LogoHorizontalWhite from '../assets/logoHorizontalWhite.svg'
 
 
-export default function Menu(){
+export default function Menu({handleAnalogOpen, handleSetTimeOpen}){
 
     const [menuOpen, setMenuOpen] = useState(false) 
 
@@ -25,6 +25,12 @@ export default function Menu(){
         }
     }
 
+    const handleAnalogClick = () => {
+        handleAnalogOpen()
+        handleSetTimeOpen()
+        toggleMenu()
+    }
+
     return (
         <AnimatePresence>
         {menuOpen ? (
@@ -36,12 +42,9 @@ export default function Menu(){
                 exit='closed'
                 variants={menuVariants}
                 >
-                <img src={LogoHorizontalWhite} onClick={toggleMenu}alt="logo" className='w-9 pt-3 ml-4 absolute top-3' />
+                <img src={LogoHorizontalWhite} onClick={toggleMenu}alt="logo" className='w-9 pt-3 ml-4 absolute top-3 ' />
                 <ul className=' font-PTSans tracking-widest font-bold text-2xl text-gray-50 flex flex-col gap-8 '>
-                    <Link 
-                        to='/analog'
-                        onClick={toggleMenu}
-                    >ANALOG TIMER</Link>
+                    <li onClick={handleAnalogClick} className='hover:cursor-pointer'>ANALOG TIMER</li>
                     <li>DIGITAL TIMER</li>
                     <li>VISUAL TIMER</li>
                     <li>TEXT TIMER</li>
@@ -50,7 +53,7 @@ export default function Menu(){
             </motion.nav>
         ) : (
             <motion.nav 
-            className='menu-closed min-w-[375px] bg-gray-50 shadow-2xl absolute top-3'
+            className='hover:cursor-pointer menu-closed min-w-[375px] bg-gray-50 shadow-2xl absolute top-3'
             key={'menu-closed'}
             initial='closed'
             animate='open'

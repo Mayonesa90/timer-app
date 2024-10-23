@@ -9,7 +9,7 @@ export default function TimesUp({handleReset}){
             opacity: [1, 0],    // Fade out as they expand
             
             transition: {
-                duration: 3,    // Ripple effect duration
+                duration: 2,    // Ripple effect duration
                 repeat: Infinity, // Repeat infinitely
                 ease: "easeInOut", // Smooth easing
                 staggerChildren: 0.5,// Delay between ripples

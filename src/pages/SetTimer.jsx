@@ -5,11 +5,13 @@ import {useState, useEffect} from 'react'
 import useTimer from 'easytimer-react-hook'
 import {motion} from 'framer-motion'
 import TimesUp from '../components/TimesUp'
+import { useTimerContext } from '../helpers/TimerContext'
 
 export default function SetTimerPage(){
 
-    const [time, setTime] = useState(1)
-    const [timer, isTargetAchieved] = useTimer()
+    // const [time, setTime] = useState(1)
+    // const [timer, isTargetAchieved] = useTimer()
+    const { timer, isTargetAchieved, time, setTime } = useTimerContext();
     const [intervals, setIntervals] = useState(false)
     const [fiveMinBreak, setFiveMinBreak] = useState(false)
     const [showTimesUp, setShowTimesUp] = useState(false)
@@ -63,7 +65,7 @@ export default function SetTimerPage(){
   
     
     
-    const countDown = timer.getTimeValues().toString()    
+    // const countDown = timer.getTimeValues().toString()    
     
 
     const blinkVariants = {
@@ -77,6 +79,7 @@ export default function SetTimerPage(){
         },
       };
 
+
     const handleReset = () => {
         
         setShowTimesUp(false)
@@ -89,7 +92,7 @@ export default function SetTimerPage(){
             animate={{opacity: 1}}
             transition={{duration: 0.01}}
         >
-            {timer ? <p className='absolute text-white'>{countDown}</p> : null}
+            {/* {timer ? <p className='absolute text-white'>{countDown}</p> : null} */}
             {showTimesUp ? <TimesUp handleReset={handleReset} /> : null}
         <main className='min-w-[375px] mx-auto  bg-gray-50 shadow-2xl flex flex-col items-center justify-center gap-y-16 relative'>
             <Menu />
