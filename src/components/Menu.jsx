@@ -74,13 +74,6 @@ export default function Menu({analogOpen, digitalOpen, showSetTime, handleAnalog
                 <ul className=' font-PTSans tracking-widest font-bold text-2xl text-gray-50 flex flex-col gap-8 '>
                     <li onClick={handleAnalogClick} className='hover:cursor-pointer'>ANALOG TIMER</li>
                     <li onClick={handleDigitalClick} className='hover:cursor-pointer'>DIGITAL TIMER</li>
-                    {/* <li onClick={() => handleMenuClick('analog')} className='hover:cursor-pointer'>
-                        ANALOG TIMER
-                    </li>
-                    <li onClick={() => handleMenuClick('digital')} className='hover:cursor-pointer'>
-                        DIGITAL TIMER
-                    </li> */}
-                    <li>VISUAL TIMER</li>
                     <li>TEXT TIMER</li>
                     <li>CIRCLES TIMER</li>
                 </ul>

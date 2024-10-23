@@ -6,6 +6,8 @@ import {useState, useEffect} from 'react'
 export default function Analog({totalDurationInSeconds, countDown, handleAnalogOpen, handleSetTimeOpen, handleStop}) { 
     
     const [rotation, setRotation] = useState(0)
+    const [backgroundColor, setBackgroundColor] = useState('#F3F4F6')
+    let countDownInSeconds = null;
 
     //Parse the countdown into total seconds
     const parseCountDown = (countDown) => {
@@ -19,7 +21,7 @@ export default function Analog({totalDurationInSeconds, countDown, handleAnalogO
 
     useEffect(() => {
         // Recalculate the countdown in seconds every time `countDown` changes
-        const countDownInSeconds = parseCountDown(countDown);
+        countDownInSeconds = parseCountDown(countDown);
 
         // Calculate elapsed time
         const newElapsedTime = totalDurationInSeconds - countDownInSeconds;
@@ -30,8 +32,17 @@ export default function Analog({totalDurationInSeconds, countDown, handleAnalogO
         // Update rotation state
         setRotation(calculatedRotation);
 
-    }, [countDown, totalDurationInSeconds]); // Re-run this effect when `countDown` or `totalDurationInSeconds` changes
+        if (countDownInSeconds === 30) {
+            setBackgroundColor('#FFA500'); // Blink orange when 30 seconds left
+        } else if (countDownInSeconds === 15) {
+            setBackgroundColor('#FF4500'); // Blink red when 15 seconds left
+        } else {
+            setBackgroundColor('#F3F4F6'); // Reset background color to gray
+        }
+    
 
+    }, [countDown, totalDurationInSeconds]); // Re-run this effect when `countDown` or `totalDurationInSeconds` changes
+    
     
     const handleClick = () => {
         handleAnalogOpen()
@@ -40,12 +51,20 @@ export default function Analog({totalDurationInSeconds, countDown, handleAnalogO
     }
    
     return (
-        <main className='min-w-[375px] mx-auto  bg-gray-50 shadow-2xl flex flex-col items-center justify-center gap-y-16 relative'>
+        <motion.main 
+            className='min-w-[375px] mx-auto  bg-gray-50 shadow-2xl flex flex-col items-center justify-center gap-y-16 relative'
+            initial={{ backgroundColor: '#F3F4F6' }} // Initial background color
+            animate={{ backgroundColor }} // Animate to the background color based on state
+            transition={{
+                duration: 3, // Smooth transition for the blink effect
+                repeatType: 'reverse', // Reverse blink effect
+            }}
+            >
             <section className='flex gap-[42px] items-center'>
                <img src={Clock} alt="clock" />
                 <motion.img 
                     src={Handle}
-                    className='absolute top-[4%] left-[50%]  '
+                    className='absolute top-[3.5%] left-[49.55%]  '
                     style={{ transformOrigin: 'bottom center' }}  
                     animate={{
                         rotate: rotation
@@ -64,6 +83,6 @@ export default function Analog({totalDurationInSeconds, countDown, handleAnalogO
                     onClick={handleClick}
                 >ABORT TIMER</motion.button>
             </section>
-        </main>
+        </motion.main>
     );
 }
