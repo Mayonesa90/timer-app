@@ -88,7 +88,7 @@ export default function SetTimerPage(){
         timer.stop()
     }
     
-    const countDown = timer.getTimeValues().toString()    
+    const countDown = timer.getTimeValues().toString()
     
     //Animation to highlight when user changes number
     const blinkVariants = {
@@ -103,6 +103,30 @@ export default function SetTimerPage(){
       };
 
 
+    //Animation logic to analog clock
+
+    // const [elapsedTime, setElapsedTime] = useState(0);
+    // const [startTime, setStartTime] = useState();
+    
+    let totalDurationInSeconds = time * 60
+    // let rotation = null
+    // let parseCount = null
+
+    // console.log('totalDurationInSeconds: ', totalDurationInSeconds);
+      
+    // if (countDown){
+    //     parseCount = (countDown) => {
+    //         const parts = countDown.split(':');
+    //         const hours = parseInt(parts[0], 10);
+    //         const minutes = parseInt(parts[1], 10);
+    //         const seconds = parseInt(parts[2], 10);
+    //         // Convert everything to total seconds
+    //         return (hours * 3600) + (minutes * 60) + seconds;
+    //     }
+        
+    //     totalDurationInSeconds = parseCount(countDown);        
+    // }
+    
 
 
     return (
@@ -143,7 +167,12 @@ export default function SetTimerPage(){
                 /> : null}
             {analogOpen ? 
                 <Analog 
-                    countDown={countDown} 
+                    totalDurationInSeconds={totalDurationInSeconds} 
+                    countDown={countDown}
+                    // handleStartTime={handleStartTime}
+                    // handleElapsedTime={handleElapsedTime}
+                    // rotation={rotation}
+                    // startTime={startTime}
                     handleAnalogOpen={handleAnalogOpen} 
                     handleSetTimeOpen={handleSetTimeOpen}
                     handleStop={handleStop}

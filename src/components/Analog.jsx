@@ -1,23 +1,38 @@
 import {motion} from 'framer-motion'
 import Clock from '../assets/clockMinutes.svg'
-import HourHandle from '../assets/clockHourHandle.svg'
-import MinuteHandle from '../assets/clockMinuteHandle.svg'
 import Handle from '../assets/clockHandle.svg'
+import {useState, useEffect} from 'react'
 
-export default function Analog({countDown, handleAnalogOpen, handleSetTimeOpen, handleStop}) { 
+export default function Analog({totalDurationInSeconds, countDown, handleAnalogOpen, handleSetTimeOpen, handleStop}) { 
+    
+    const [rotation, setRotation] = useState(0)
 
-    const parseCount = (countDown) => {
+    //Parse the countdown into total seconds
+    const parseCountDown = (countDown) => {
         const parts = countDown.split(':');
         const hours = parseInt(parts[0], 10);
         const minutes = parseInt(parts[1], 10);
         const seconds = parseInt(parts[2], 10);
-        // Convert everything to total seconds
         return (hours * 3600) + (minutes * 60) + seconds;
-    }
 
-    const totalDurationInSeconds = parseCount(countDown);
+    };
 
+    useEffect(() => {
+        // Recalculate the countdown in seconds every time `countDown` changes
+        const countDownInSeconds = parseCountDown(countDown);
 
+        // Calculate elapsed time
+        const newElapsedTime = totalDurationInSeconds - countDownInSeconds;
+
+        // Calculate rotation based on elapsed time (fraction of total duration)
+        const calculatedRotation = (newElapsedTime / totalDurationInSeconds) * 360;
+
+        // Update rotation state
+        setRotation(calculatedRotation);
+
+    }, [countDown, totalDurationInSeconds]); // Re-run this effect when `countDown` or `totalDurationInSeconds` changes
+
+    
     const handleClick = () => {
         handleAnalogOpen()
         handleSetTimeOpen()
@@ -33,12 +48,10 @@ export default function Analog({countDown, handleAnalogOpen, handleSetTimeOpen, 
                     className='absolute top-[4%] left-[50%]  '
                     style={{ transformOrigin: 'bottom center' }}  
                     animate={{
-                        rotate: [0, 360] // Rotate from 0 to 360 degrees
+                        rotate: rotation
                     }}
                     transition={{
-                        duration: totalDurationInSeconds, // Total animation time
                         ease: 'linear',
-                        repeat: Infinity // Keep spinning every second
                     }}
                 />
             </section>
