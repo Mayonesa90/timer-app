@@ -5,50 +5,34 @@ import {useState, useEffect} from 'react'
 
 export default function Analog({totalDurationInSeconds, countDown, handleAnalogOpen, handleSetTimeOpen, handleStop}) { 
     
-    const [rotation, setRotation] = useState(0)
-    const [backgroundColor, setBackgroundColor] = useState('#F3F4F6')
-    let countDownInSeconds = null;
-
-    //Parse the countdown into total seconds
-    const parseCountDown = (countDown) => {
-        const parts = countDown.split(':');
-        const hours = parseInt(parts[0], 10);
-        const minutes = parseInt(parts[1], 10);
-        const seconds = parseInt(parts[2], 10);
-        return (hours * 3600) + (minutes * 60) + seconds;
-
-    };
-
-    useEffect(() => {
-        // Recalculate the countdown in seconds every time `countDown` changes
-        countDownInSeconds = parseCountDown(countDown);
-
-        // Calculate elapsed time
-        const newElapsedTime = totalDurationInSeconds - countDownInSeconds;
-
-        // Calculate rotation based on elapsed time (fraction of total duration)
-        const calculatedRotation = (newElapsedTime / totalDurationInSeconds) * 360;
-
-        // Update rotation state
-        setRotation(calculatedRotation);
-
-        if (countDownInSeconds === 30) {
-            setBackgroundColor('#FFA500'); // Blink orange when 30 seconds left
-        } else if (countDownInSeconds === 15) {
-            setBackgroundColor('#FF4500'); // Blink red when 15 seconds left
-        } else {
-            setBackgroundColor('#F3F4F6'); // Reset background color to gray
-        }
-    
-
-    }, [countDown, totalDurationInSeconds]); // Re-run this effect when `countDown` or `totalDurationInSeconds` changes
-    
-    
     const handleClick = () => {
         handleAnalogOpen()
         handleSetTimeOpen()
         handleStop()
     }
+
+    const [rotation, setRotation] = useState(0)
+    const [backgroundColor, setBackgroundColor] = useState('#F3F4F6')
+
+    useEffect(() => {
+        // Calculate rotation based on remaining countdown
+        const elapsedTime = totalDurationInSeconds - countDown;
+        
+        // Every second, the handle should rotate 6 degrees
+        const newRotation = (elapsedTime * 6) % 360;
+
+        // Update the rotation state
+        setRotation(newRotation);
+
+    }, [countDown, totalDurationInSeconds]);
+
+
+    
+    
+    // console.log(rotation);
+    // console.log(oneMinuteRotation);
+    
+
    
     return (
         <motion.main 

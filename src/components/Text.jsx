@@ -1,33 +1,28 @@
 import { toWords } from 'number-to-words'
 import {motion} from 'framer-motion'
 
-export default function Text({countDown, handleTextOpen, handleStop, handleSetTimeOpen}) { 
+export default function Text({hours, minutes, seconds, handleTextOpen, handleStop, handleSetTimeOpen}) { 
 
     const handleClick = () => {
         handleTextOpen()
         handleStop()
         handleSetTimeOpen()
     }
-
-    //Parse the countdown into total seconds
-    const parseCountDown = (countDown) => {
-        const parts = countDown.split(':');
-        const hours = parseInt(parts[0], 10);
-        const minutes = parseInt(parts[1], 10);
-        const seconds = parseInt(parts[2], 10);
-        return (hours * 3600) + (minutes * 60) + seconds;
-
-    };
     
-    const numberToWords = toWords(parseCountDown(countDown));
+    const hoursInText = toWords(hours)
+    const minutesInText = toWords(minutes)
+    const secondsInText = toWords(seconds)
     
-
     return (
        
-        <main className='min-w-[375px] mx-auto  bg-gray-50 shadow-2xl flex flex-col items-center justify-center gap-y-16 relative'>
-            <section className='flex gap-[42px] items-center'>
+        <main className='min-w-[375px]  mx-auto  bg-gray-50 shadow-2xl flex flex-col items-center justify-center gap-y-16 relative'>
+            <section className='flex gap-[42px] items-center max-w-[350px]'>
                 <h1 className=' font-PTSans text-[30px] font-semibold text-wrap'>
-                    {numberToWords} seconds
+                    {hours === 1 ? `${hoursInText} hour` : null}
+                    {hours > 1 ? `${hoursInText} hours` : null}
+                    {minutes === 1 ? ` ${minutesInText} minute` : null}
+                    {minutes > 1 ? ` ${minutesInText} minutes` : null}
+                    {secondsInText ? ` ${secondsInText} seconds` : null}
                 </h1>
             </section>
             <section className='flex flex-col gap-y-4'>

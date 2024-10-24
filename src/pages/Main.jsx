@@ -57,6 +57,10 @@ export default function SetTimerPage(){
     const handleFiveMinBreak = () => {
         setFiveMinBreak(!fiveMinBreak)
     }
+
+    const handleStop = () => {
+        timer.stop()
+    }
     
     const handleStart = () => {
         handleSetTimeOpen()
@@ -89,17 +93,24 @@ export default function SetTimerPage(){
         });
     }
 
-    const handleStop = () => {
-        timer.stop()
-    }
     
     const countDown = timer.getTimeValues().toString()
-
-
     let totalDurationInSeconds = time * 60
-   
+    let hours = null
+    let minutes = null
+    let seconds = null
+    
+    //Parse the countdown into total seconds
+    const parseCountDown = (countDown) => {
+        const parts = countDown.split(':');
+        hours = parseInt(parts[0], 10);
+        minutes = parseInt(parts[1], 10);
+        seconds = parseInt(parts[2], 10);
+        return (hours * 3600) + (minutes * 60) + seconds;
+    };
 
-
+    let countDownInSeconds = parseCountDown(countDown)
+    
     return (
         <motion.div 
             className='wrapper w-full min-h-svh grid bg-gray-900 text-gray-900'
@@ -120,7 +131,10 @@ export default function SetTimerPage(){
                     handleDigitalOpen={handleDigitalOpen}
                     handleTextOpen={handleTextOpen}
                 /> : null}
-        <main className='min-w-[375px] mx-auto  bg-gray-50 shadow-2xl flex flex-col items-center justify-center gap-y-16 relative'>
+        <motion.main 
+            className='min-w-[375px] mx-auto  bg-gray-50 shadow-2xl flex flex-col items-center justify-center gap-y-16 relative'
+            
+        >
             <Menu 
                 analogOpen={analogOpen}
                 digitalOpen={digitalOpen}
@@ -143,7 +157,7 @@ export default function SetTimerPage(){
             {analogOpen ? 
                 <Analog 
                     totalDurationInSeconds={totalDurationInSeconds} 
-                    countDown={countDown}
+                    countDown={countDownInSeconds}
                     handleAnalogOpen={handleAnalogOpen} 
                     handleSetTimeOpen={handleSetTimeOpen}
                     handleStop={handleStop}
@@ -157,12 +171,14 @@ export default function SetTimerPage(){
                 /> : null}
             {textOpen ?
                 <Text
-                    countDown={countDown}
+                    hours={hours} 
+                    minutes={minutes} 
+                    seconds={seconds}
                     handleTextOpen={handleTextOpen}
                     handleStop={handleStop}
                     handleSetTimeOpen={handleSetTimeOpen}
                 /> : null}
-        </main>
+        </motion.main>
       </motion.div>
     )
 
