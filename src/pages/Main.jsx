@@ -74,7 +74,6 @@ export default function SetTimerPage(){
             updateWhenTargetAchieved: true
         })
         timer.addEventListener('targetAchieved', () => {
-            console.log('Target achieved!');
             // Perform your actions here when the timer finishes
             if (intervals && fiveMinBreak) {
                 console.log('Starting 5-minute break');
@@ -83,10 +82,14 @@ export default function SetTimerPage(){
                     startValues: {minutes: 5},
                     countdown: true
                 });
-            } else if (intervals && !fiveMinBreak) {
+            } 
+            
+            if (intervals && !fiveMinBreak) {
                 console.log('Timer resets!');
                 timer.reset(); 
-            } else {
+            } 
+            
+            if (!intervals && !fiveMinBreak) {
                 console.log('Countdown finished. No intervals or breaks.');
                 setShowTimesUp(true)
             }
@@ -116,7 +119,6 @@ export default function SetTimerPage(){
 
     useEffect(() => {
         if (countDownInSeconds === 0 || countDownInSeconds > 30) {
-            // setBackgroundColor('#f9fafb');
             setBackgroundColor('#43AA8B');
         } else if (countDownInSeconds <= 30 && countDownInSeconds > 15) {
             setBackgroundColor('#F46036');
@@ -124,7 +126,6 @@ export default function SetTimerPage(){
             setBackgroundColor('#DB504A');
         }
     }, [countDownInSeconds]);
-    console.log(countDownInSeconds);
     
     
     return (
@@ -132,7 +133,8 @@ export default function SetTimerPage(){
             className='wrapper w-full  min-h-svh grid bg-gray-900 text-gray-900'
             initial={{opacity: 0}}
             animate={{opacity: 1}}
-            transition={{duration: 0.01}}
+            transition={{duration: 0.01, staggerChildren: 3}}
+            
         >
             {timer ? <p className='absolute text-gray-50'>{countDown}</p> : null}
             {showTimesUp ? 
@@ -149,7 +151,7 @@ export default function SetTimerPage(){
                 /> : null}
         <motion.main 
             className='min-w-[375px] mx-auto  shadow-2xl flex flex-col items-center justify-center gap-y-16 relative'
-            initial={{ backgroundColor: '##111827' }} // Initial background color
+            initial={{ backgroundColor: '#111827' }} // Initial background color
             animate={{ backgroundColor }} // Animate to the background color based on state
             transition={{
                 duration: 3, // Smooth transition for the blink effect

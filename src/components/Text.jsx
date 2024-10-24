@@ -1,5 +1,4 @@
 import { toWords } from 'number-to-words'
-import {motion} from 'framer-motion'
 import AbortBtn from './AbortBtn'
 
 export default function Text({hours, minutes, seconds, handleTextOpen, handleStop, handleSetTimeOpen}) { 
@@ -21,9 +20,9 @@ export default function Text({hours, minutes, seconds, handleTextOpen, handleSto
                 <h1 className=' font-PTSans text-[30px] font-semibold text-wrap'>
                     {hours === 1 ? `${hoursInText} hour` : null}
                     {hours > 1 ? `${hoursInText} hours` : null}
-                    {minutes === 1 ? ` ${minutesInText} minute` : null}
-                    {minutes > 1 ? ` ${minutesInText} minutes` : null}
-                    {secondsInText ? ` ${secondsInText} seconds` : null}
+                    {minutes === 1 ? ` ${minutesInText} minute and` : null}
+                    {minutes > 1 ? ` ${minutesInText} minutes and` : null}
+                    {secondsInText ? ` ${secondsInText} seconds left` : null}
                 </h1>
             </section>
             <AbortBtn handleClick={handleClick}/>

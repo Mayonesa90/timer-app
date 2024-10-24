@@ -11,8 +11,9 @@ export default function Loading(){
               src={LogoVertical} 
               alt="logo" 
               className='w-9 mx-auto mb-2' 
-              animate={{opacity: [0, 1]}}
-              transition={{duration: 3, delay: 0.5, ease: 'easeInOut', repeatType: 'mirror', repeat: Infinity}}
+              animate={{opacity: [0.15, 1]}}
+              initial={{opacity: 1}}
+              transition={{duration: 2, delay: 0.5, ease: 'easeInOut', repeatType: 'mirror', repeat: Infinity}}
             />
           </Link>
           <h1 className=' tracking-widest text-gray-50 text-xl font-RighteousFont text-center'>INTERVAL</h1>

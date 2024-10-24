@@ -17,7 +17,12 @@ export default function SetTimerPage(props){
 
     return (
         <>
-            <section className='flex gap-[42px] items-center'>
+            <motion.section 
+                className='flex gap-[42px] items-center'
+                // animation={{opacity: [0, 1]}}
+                // transition={{duration: 0.5, delay: 1}}
+            >
+                
                 <motion.img 
                     src={ArrowLeft} 
                     alt="add five minutes" 
@@ -36,7 +41,7 @@ export default function SetTimerPage(props){
                     >
                         {props.time}
                     </motion.h1>
-                    <p className=' font-PTSans text-[16px] text-gray-50'>minutes</p>
+                    <motion.p className=' font-PTSans text-[16px] text-gray-50'>minutes</motion.p>
                 </section>
                 <motion.img 
                     src={ArrowRight} 
@@ -45,7 +50,7 @@ export default function SetTimerPage(props){
                     onClick={props.handleIncrement}
                     whileTap={{scale: 0.9}}
                 />
-            </section>
+            </motion.section>
             <section className='flex flex-col gap-y-4'>
                 <section className='flex gap-x-4 '>
                     <input 
