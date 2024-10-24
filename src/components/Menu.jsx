@@ -115,7 +115,7 @@ export default function Menu({analogOpen, digitalOpen, textOpen, showSetTime, ha
                 variants={menuVariants}
             >
                 <img src={LogoHorizontalBlack} onClick={toggleMenu} alt="logo" className='w-9 pt-3  ml-4 absolute ' />
-                <h1 className=' tracking-widest text-gray-400 text-xl font-RighteousFont absolute top-3 left-[40%]'>interval</h1>
+                <h1 className=' tracking-widest text-gray-50 text-xl font-RighteousFont absolute top-3 left-[40%]'>interval</h1>
             </motion.nav>
         )
             }

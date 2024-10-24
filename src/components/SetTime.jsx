@@ -36,7 +36,7 @@ export default function SetTimerPage(props){
                     >
                         {props.time}
                     </motion.h1>
-                    <p className=' font-PTSans text-[16px] text-gray-500'>minutes</p>
+                    <p className=' font-PTSans text-[16px] text-gray-50'>minutes</p>
                 </section>
                 <motion.img 
                     src={ArrowRight} 
@@ -54,7 +54,7 @@ export default function SetTimerPage(props){
                         id='intervals'
                         onChange={props.handleIntervals}
                     />
-                    <label htmlFor="intervals" className='text-gray-500 font-PTSans font-xs tracking-widest' >intervals</label>
+                    <label htmlFor="intervals" className='text-gray-50 font-PTSans font-xs tracking-widest' >intervals</label>
                 </section>
                 <section className='flex gap-x-4'>
                     <input 
@@ -63,7 +63,7 @@ export default function SetTimerPage(props){
                         id='break' 
                         onChange={props.handleFiveMinBreak}
                     />
-                    <label htmlFor="break" className='text-gray-500 font-PTSans font-xs tracking-widest'>5 min break / interval</label>
+                    <label htmlFor="break" className='text-gray-50 font-PTSans font-xs tracking-widest'>5 min break / interval</label>
                 </section>
                 <motion.button 
                     className='h-[51px] w-[279px] font-PTSans text-[24px] font-semibold tracking-widest border border-gray-900 rounded-md'

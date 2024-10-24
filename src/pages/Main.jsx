@@ -99,7 +99,7 @@ export default function SetTimerPage(){
     let hours = null
     let minutes = null
     let seconds = null
-    
+
     //Parse the countdown into total seconds
     const parseCountDown = (countDown) => {
         const parts = countDown.split(':');
@@ -110,15 +110,31 @@ export default function SetTimerPage(){
     };
 
     let countDownInSeconds = parseCountDown(countDown)
+
+    //Background change
+    const [backgroundColor, setBackgroundColor] = useState('#F3F4F6')
+
+    useEffect(() => {
+        if (countDownInSeconds === 0 || countDownInSeconds > 30) {
+            // setBackgroundColor('#f9fafb');
+            setBackgroundColor('#43AA8B');
+        } else if (countDownInSeconds <= 30 && countDownInSeconds > 15) {
+            setBackgroundColor('#F46036');
+        } else {
+            setBackgroundColor('#DB504A');
+        }
+    }, [countDownInSeconds]);
+    console.log(countDownInSeconds);
+    
     
     return (
         <motion.div 
-            className='wrapper w-full min-h-svh grid bg-gray-900 text-gray-900'
+            className='wrapper w-full  min-h-svh grid bg-gray-900 text-gray-900'
             initial={{opacity: 0}}
             animate={{opacity: 1}}
             transition={{duration: 0.01}}
         >
-            {timer ? <p className='absolute text-white'>{countDown}</p> : null}
+            {timer ? <p className='absolute text-gray-50'>{countDown}</p> : null}
             {showTimesUp ? 
                 <TimesUp 
                     analogOpen={analogOpen}
@@ -132,8 +148,13 @@ export default function SetTimerPage(){
                     handleTextOpen={handleTextOpen}
                 /> : null}
         <motion.main 
-            className='min-w-[375px] mx-auto  bg-gray-50 shadow-2xl flex flex-col items-center justify-center gap-y-16 relative'
-            
+            className='min-w-[375px] mx-auto  shadow-2xl flex flex-col items-center justify-center gap-y-16 relative'
+            initial={{ backgroundColor: '##111827' }} // Initial background color
+            animate={{ backgroundColor }} // Animate to the background color based on state
+            transition={{
+                duration: 3, // Smooth transition for the blink effect
+                repeatType: 'reverse', // Reverse blink effect
+            }}
         >
             <Menu 
                 analogOpen={analogOpen}
