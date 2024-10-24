@@ -58,15 +58,6 @@ export default function TimesUp({analogOpen, digitalOpen, textOpen, showSetTime,
                     </motion.div>
                 </motion.div>
             </motion.div>
-            <motion.button 
-                    className='h-[51px] w-[279px] font-PTSans text-[#ffffff99] text-[24px] font-semibold tracking-widest border border-[#ffffff99] rounded-md bg-transparent absolute bottom-[49px] left-[20%] transform -translate-x-1/2  '
-                    initial={{scale: 1}}
-                    whileTap={{scale: 0.95}}
-                    transition={{duration: 0.1, ease: 'easeIn'}}  
-                    onClick={handleClick}      
-            >
-                SET NEW TIMER
-            </motion.button>
             <motion.div 
                 className='z-50 absolute flex flex-col items-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-nowrap'
                 animate={{opacity: [0, 1]}}
@@ -74,6 +65,15 @@ export default function TimesUp({analogOpen, digitalOpen, textOpen, showSetTime,
             >
                 <motion.img animate='none' src={Alarm} className=' max-w-[85px]'/>
                 <p className='text-[36px] text-gray-50 font-bold tracking-widest'>Times up!</p>
+                <motion.button 
+                    className='h-[51px] w-[279px] font-PTSans text-[#ffffff99] text-[24px] font-semibold tracking-widest border border-[#ffffff99] rounded-md bg-transparent absolute transform -bottom-[100%]  '
+                    initial={{scale: 1}}
+                    whileTap={{scale: 0.95}}
+                    transition={{duration: 0.1, ease: 'easeIn'}}  
+                    onClick={handleClick}      
+            >
+                SET NEW TIMER
+            </motion.button>
             </motion.div>                  
         </div>
     )
