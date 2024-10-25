@@ -12,7 +12,7 @@ export default function Analog({totalDurationInSeconds, countDown, handleAnalogO
         handleStop()
     }
 
-    const [rotation, setRotation] = useState(0)
+    const [rotation, setRotation] = useState(0) //rotation for handle
 
     useEffect(() => {
         // Calculate rotation based on remaining countdown
@@ -28,8 +28,12 @@ export default function Analog({totalDurationInSeconds, countDown, handleAnalogO
 
    
     return (
-        <main 
+        <motion.main 
             className='min-w-[375px] mx-auto  bg-transparent  flex flex-col items-center justify-center gap-y-16 relative'
+            animate={{
+                opacity: [0, 1],
+                transition: { duration: 0.75 }
+            }}
             >
             <section className='flex gap-[42px] items-center'>
                <img src={Clock} alt="clock" />
@@ -46,6 +50,6 @@ export default function Analog({totalDurationInSeconds, countDown, handleAnalogO
                 />
             </section>
             <AbortBtn handleClick={handleClick}/>
-        </main>
+        </motion.main>
     );
 }

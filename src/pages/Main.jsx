@@ -75,64 +75,11 @@ export default function SetTimerPage(){
         timer.reset()
     }
 
-    //TEST-functions
-    // const handleStart = () => {
-    //     // Set the timer for the first work interval
-    //     startWorkTimer();
-    // };
-
-    // const startWorkTimer = () => {
-    //     timer.removeEventListener('targetAchieved');
-    //     timer.start({
-    //         precision: 'seconds',
-    //         startValues: { minutes: time },
-    //         countdown: true,
-    //         target: { minutes: 0 },
-    //         updateWhenTargetAchieved: true
-    //     });
-
-    //     if(showTimeOpen){
-    //         setShowSetTime(false)
-    //     }
-    //     if()
-
-    //     timer.addEventListener('targetAchieved', handleWorkCompleted);
-    // };
-
-    // const handleWorkCompleted = () => {
-    //     // When work timer ends, initiate break if enabled
-    //     if (intervals && fiveMinBreak) {
-    //         setPauseOpen(true);
-    //         startBreakTimer();
-    //     } else if (intervals && !fiveMinBreak){
-    //         timer.reset()
-    //     } else {
-    //         setShowTimesUp(true);
-    //     }
-    // };
-
-    // const startBreakTimer = () => {
-    //     timer.removeEventListener('targetAchieved');
-    //     timer.start({
-    //         precision: 'seconds',
-    //         startValues: { minutes: 1 }, // Set to 5 for actual 5-min break
-    //         countdown: true,
-    //         target: { minutes: 0 },
-    //         updateWhenTargetAchieved: true
-    //     });
-
-    //     timer.addEventListener('targetAchieved', handleBreakCompleted);
-    // };
-
-    // const handleBreakCompleted = () => {
-    //     setPauseOpen(false);
-    //     startWorkTimer(); // Resume work timer after break
-    // };
-
     //Start function to handle start of timer 
     
     const handleStart = () => {
-
+        console.log('handleStart starting');
+        
         if(showSetTime){
             setAnalogOpen(true)
             setShowSetTime(false)
@@ -141,8 +88,6 @@ export default function SetTimerPage(){
         if(digitalOpen || textOpen || analogOpen){
             setShowSetTime(false)
         }
-
-       
         timer.removeEventListener('targetAchieved');
 
         timer.start({
@@ -156,7 +101,7 @@ export default function SetTimerPage(){
         timer.addEventListener('targetAchieved', () => {
             // Perform your actions here when the timer finishes
             if (intervals && fiveMinBreak) {
-                setPauseOpen(true)
+                setPauseOpen(true) //open Pause-component
              
                 // Clear previous event listeners
                 timer.removeEventListener('targetAchieved');
@@ -169,25 +114,22 @@ export default function SetTimerPage(){
                     updateWhenTargetAchieved: true
                 })                
 
-                // After 5 minutes, reset the pause state and timer
+                // After 5 minutes
                 timer.addEventListener('targetAchieved', () => {
-                    setPauseOpen(false);
-                    // setPauseTimer(null);
-                
-                    // Restart the original timer  
-                                   
-                    return handleStart()
-                    
-                    
+                    setPauseOpen(false); //close Pause-component
+
+                    // Restart the original timer                              
+                    handleStart() //Not working as it should, only the pause-timer reruns :(
+                    return console.log('restaring function');
                 });
                 return
             } else if (intervals && !fiveMinBreak) {
-                timer.reset();
+                timer.reset(); //If user chose intervals timer resets
                 console.log('Timer resets!');
                 return;
                 
             } else if (!intervals && !fiveMinBreak) {
-                setShowTimesUp(true)
+                setShowTimesUp(true) //if user didn't chose intervals and/or 5 min break the function ends with the Times Up-component
                 console.log('Countdown finished. No intervals or breaks.');
                 return
             }
@@ -195,12 +137,11 @@ export default function SetTimerPage(){
     }    
 
     
-    const countDown = timer.getTimeValues().toString()
+    const countDown = timer.getTimeValues().toString() //The time countdown from easytimer
     let totalDurationInSeconds = time * 60
     let hours = null
     let minutes = null
     let seconds = null
-    console.log(countDown);
     
     //Parse the countdown into total seconds
     const parseCountDown = (countDown) => {
@@ -211,9 +152,9 @@ export default function SetTimerPage(){
         return (hours * 3600) + (minutes * 60) + seconds;
     };
 
-    let countDownInSeconds = parseCountDown(countDown)
+    let countDownInSeconds = parseCountDown(countDown) //only the seconds for analog animation
 
-    //Background change
+    //Background change for when time is running out
     const [backgroundColor, setBackgroundColor] = useState('#F3F4F6')
 
     useEffect(() => {
@@ -226,6 +167,11 @@ export default function SetTimerPage(){
         }
     }, [countDownInSeconds]);
     
+    //Testing why analogOpen is set to true when function restarts automatically...
+    console.log('analogOpen: ', analogOpen);
+    console.log('textOpen: ', textOpen);
+    console.log('digitalOpen', digitalOpen);
+    console.log('showSetTime: ', showSetTime);
     
     return (
         <motion.div 
@@ -250,17 +196,18 @@ export default function SetTimerPage(){
                 /> : null}
             {pauseOpen ?
                 <Pause
+                    countDown={countDown}
                     handleTimeReset={handleTimeReset}
                     handlePauseOpen={handlePauseOpen}
                     handleStart={handleStart} 
                 /> : null}
         <motion.main 
             className='w-full mx-auto  shadow-2xl flex flex-col items-center justify-center gap-y-16 relative'
-            initial={{ backgroundColor: '#111827' }} // Initial background color
-            animate={{ backgroundColor }} // Animate to the background color based on state
+            initial={{ backgroundColor: '#111827' }} // Animation for blink effect when user makes changes to highlight the changes
+            animate={{ backgroundColor }} 
             transition={{
-                duration: 3, // Smooth transition for the blink effect
-                repeatType: 'reverse', // Reverse blink effect
+                duration: 3, 
+                repeatType: 'reverse', 
             }}
         >
             <Menu 

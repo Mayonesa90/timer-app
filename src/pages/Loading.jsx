@@ -12,12 +12,11 @@ export default function Loading(){
               src={LogoVertical} 
               alt="logo" 
               className='logo w-9 mx-auto mb-2' 
-              // initial={{opacity: 0.15}}
-              // style={{stroke: "#8093F1"}}
               animate={{
-                // opacity: [1, 1, 1, 1, 1, 0.15, 0.15, 1, 1],  // Keyframes for opacity
-                scale: [1, 1, 0.9, 1, 0.9, 1, 1, 1, 1, 1],     // Keyframes for scale
-                // borderRadius: ["0%", "0%", "50%", "50%", "0%", "0%", "0%", "0%", "0%", "0%"],
+                // Keyframes for scale, outline and outlineOffset 
+                // to make the user understand they need to click on 
+                // icon to continue
+                scale: [1, 1, 0.9, 1, 0.9, 1, 1, 1, 1, 1],  
                 outline: [
                   "3px solid #35A7FF", 
                   "3px solid #111827", 
@@ -42,8 +41,17 @@ export default function Loading(){
                   "6px",
                   "6px",
 
+                ],
+                borderRadius: [
+                  "20%",
+                  "10%",
+                  "10%",
+                  "0%",
+                  "10%",
+               
+                
+                
                 ]
-              
               }}
               transition={{
                 duration: 4,  // Total duration of the animation cycle

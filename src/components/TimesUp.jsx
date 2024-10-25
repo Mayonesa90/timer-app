@@ -3,16 +3,15 @@ import {motion} from 'framer-motion'
 
 export default function TimesUp({analogOpen, digitalOpen, textOpen, showSetTime, handleReset, handleAnalogOpen, handleSetTimeOpen, handleDigitalOpen, handleTextOpen}){
     
+    //Animation for circles
     const rippleVariants = {
         animate: {
-            // scale: [1, 1.1, 1.2],   // Scale the circles over time
-            opacity: [1, 0],    // Fade out as they expand
-            
+            opacity: [1, 0],   
             transition: {
-                duration: 2,    // Ripple effect duration
-                repeat: Infinity, // Repeat infinitely
-                ease: "easeInOut", // Smooth easing
-                staggerChildren: 0.5,// Delay between ripples
+                duration: 1, // Duration shorter than animation on Pause-component to indicate urgency
+                repeat: Infinity, 
+                ease: "easeInOut", 
+                staggerChildren: 0.5,
                 repeatType: "reverse"
             },
         },

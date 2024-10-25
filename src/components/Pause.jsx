@@ -3,15 +3,22 @@ import {motion} from 'framer-motion'
 
 export default function Pause(
     {
+        countDown,
         handleTimeReset, 
         handlePauseOpen, 
         handleStart,  
     }
 ){
     
+    const handleClick = () => {
+        handleTimeReset()
+        handlePauseOpen()
+        handleStart()
+    }
+    
+    //animation for circles to create ripple-effect
     const rippleVariants = {
         animate: {
-            // scale: [1, 1.1, 1.2],   // Scale the circles over time
             opacity: [1, 0],    // Fade out as they expand
             
             transition: {
@@ -22,14 +29,6 @@ export default function Pause(
                 repeatType: "reverse"
             },
         },
-    }
-
-    const handleClick = () => {
-        handleTimeReset()
-        handlePauseOpen()
-        handleStart()
-
-        
     }
 
     return (
@@ -61,6 +60,7 @@ export default function Pause(
             >
                 <motion.img animate='none' src={PauseImg} className='mt-[90px]'/>
                 <p className='mt-[36px] text-[36px] text-gray-50 font-bold tracking-widest'>Pause & breath</p>
+                {countDown ? <p className=' text-gray-50'>{countDown}</p> : null}
                 <motion.button 
                     className='mt-[134] h-[51px] w-[279px] font-PTSans text-[#ffffff99] text-[24px] font-semibold tracking-widest border border-[#ffffff99] rounded-md bg-transparent absolute transform -bottom-[100%]  '
                     initial={{scale: 1}}
