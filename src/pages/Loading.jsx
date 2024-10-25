@@ -1,82 +1,8 @@
 import LogoVertical from '../assets/logoVertical.svg'
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
-import {motion, useAnimate, useInView} from 'framer-motion'
-import { useEffect } from 'react'
+import {motion} from 'framer-motion'
 
 export default function Loading(){
-
-  // const [scope, animate] = useAnimate()
-  // const isInView = useInView(scope)
-
-  // useEffect(() => {
-  //   if (isInView) {
-  //     const enterAnimation = async () => {
-  //       await animate(
-  //         scope.current, 
-  //         { 
-  //           opacity: [1], 
-  //           scale: [1] 
-  //         }, 
-  //         { 
-  //           duration: 2,
-  //           ease: "easeIn",
-
-  //         }
-  //       )
-  //       await animate(
-  //         scope.current, 
-  //         { 
-  //           opacity: [1], 
-  //           scale: [0.9] 
-  //         }, 
-  //         { 
-  //           duration: 1,
-  //           ease: "easeIn",
-  
-  //         }
-  //       )
-  //       await animate(
-  //         scope.current, 
-  //         { 
-  //           opacity: [1], 
-  //           scale: [1] 
-  //         }, 
-  //         { 
-  //           duration: 2,
-  //           ease: "easeOut",
-
-  //         }
-  //       )
-  //       await animate(
-  //         scope.current, 
-  //         { 
-  //           opacity: [0.15], 
-  //           scale: [1] 
-  //         }, 
-  //         { 
-  //           duration: 1,
-  //           ease: "easeIn",
-
-  //         })
-        
-  //       await 
-  //         animate(
-  //           scope.current, 
-  //           { 
-  //             opacity: [1], 
-  //             scale: [1] 
-  //           }, 
-  //           { 
-  //             duration: 2,
-  //             ease: "easeIn",
-
-  //           }
-  //         )
-
-  //     }
-  //     enterAnimation()
-  //   }
-  // }, [isInView])
 
     return (
         <div className='wrapper w-full min-h-svh bg-gray-900 grid items-center justify-center'>
@@ -84,17 +10,44 @@ export default function Loading(){
           <Link to='/main'>
             <motion.img 
               src={LogoVertical} 
-              // ref={scope}
               alt="logo" 
               className='logo w-9 mx-auto mb-2' 
-              initial={{opacity: 0.15}}
+              // initial={{opacity: 0.15}}
+              // style={{stroke: "#8093F1"}}
               animate={{
-                opacity: [1, 1, 1, 1, 1, 0.15, 0.15, 1, 1],  // Keyframes for opacity
-                scale: [1, 0.90, 1, 1, 1, 1, 1, 1, 1],     // Keyframes for scale
+                // opacity: [1, 1, 1, 1, 1, 0.15, 0.15, 1, 1],  // Keyframes for opacity
+                scale: [1, 1, 0.9, 1, 0.9, 1, 1, 1, 1, 1],     // Keyframes for scale
+                // borderRadius: ["0%", "0%", "50%", "50%", "0%", "0%", "0%", "0%", "0%", "0%"],
+                outline: [
+                  "3px solid #35A7FF", 
+                  "3px solid #111827", 
+                  "3px solid #111827", 
+                  "3px solid #111827", 
+                  "3px solid #111827", 
+                  "3px solid #111827", 
+                  "3px solid #35A7FF", 
+                  "3px solid #35A7FF",
+                  "3px solid #35A7FF", 
+                  "3px solid #35A7FF", 
+                  ],
+                outlineOffset: [
+                  "6px",
+                  "0px",
+                  "0px",
+                  "0px",
+                  "0px",
+                  "0px",
+                  "6px",
+                  "6px",
+                  "6px",
+                  "6px",
+
+                ]
+              
               }}
               transition={{
                 duration: 4,  // Total duration of the animation cycle
-                ease: "easeIn",
+                ease: "easeInOut",
                 repeat: Infinity,  // Infinite repetition
                 repeatType: "loop" // Looping behavior
               }}

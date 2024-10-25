@@ -75,122 +75,59 @@ export default function SetTimerPage(){
         timer.reset()
     }
 
-    //Separate start-functions
-
-    // const handleSimpleStart = () => {
-
-    //     if(showSetTime){
-    //         handleSetTimeOpen()
-    //     }
-
-    //     if(!analogOpen){
-    //         handleAnalogOpen()
-    //     }
-
-    //     timer.removeEventListener('targetAchieved');
-
-    //     timer.start({
-    //         precision: 'seconds',
-    //         startValues: {minutes: time},
-    //         target: {minutes: 0},
-    //         countdown: true,
-    //         updateWhenTargetAchieved: true
-    //     })
-
-    //     timer.addEventListener('targetAchieved', () => {
-    //         // Perform your actions here when the timer finishes
-    //         setShowTimesUp(true)
-    //         console.log('Countdown finished. No intervals or breaks.');
-    //     });
-
-    // }
-
-    // const handleIntervalStart = () => {
-
-    //     handleSetTimeOpen(false)
-
-    //     if (!analogOpen && !digitalOpen && !textOpen){
-    //         setAnalogOpen(true)
-    //     }
-
-    //     timer.removeEventListener('targetAchieved');
-
-    //     timer.start({
-    //         precision: 'seconds',
-    //         startValues: {minutes: time},
-    //         target: {minutes: 0},
-    //         countdown: true,
-    //         updateWhenTargetAchieved: true
-    //     })
-
-    //     timer.addEventListener('targetAchieved', () => {
-    //         // Perform your actions here when the timer finishes
-    //         timer.reset();
-    //         console.log('Timer resets!');
-    //     })    
+    //TEST-functions
+    // const handleStart = () => {
+    //     // Set the timer for the first work interval
+    //     startWorkTimer();
     // };
 
-    // const handleIntervalWithPauseStart = () => {
-
-    //     handleSetTimeOpen(false)
-
-    //     if (!analogOpen && !digitalOpen && !textOpen){
-    //         setAnalogOpen(true)
-    //     }
-
+    // const startWorkTimer = () => {
     //     timer.removeEventListener('targetAchieved');
-
     //     timer.start({
     //         precision: 'seconds',
-    //         startValues: {minutes: time},
-    //         target: {minutes: 0},
+    //         startValues: { minutes: time },
     //         countdown: true,
+    //         target: { minutes: 0 },
     //         updateWhenTargetAchieved: true
-    //     })
-
-    //     timer.addEventListener('targetAchieved', () => {
-
-    //         // Perform your actions here when the timer finishes
-    //         setPauseOpen(true)
-
-    //         // Start a 5-minute break
-    //         timer.pause({
-    //             target: {minutes: 2}, //ÄNDRA TILL 5
-    //         })
-
-    //         // After 5 minutes, reset the pause state and timer
-    //         timer.addEventListener('targetAchieved', () => {
-    //             setPauseOpen(false);
-    //             setPauseTimer(null);
-            
-    //             // Reset and restart the original timer
-    //             timer.start({ 
-    //                 precision: 'seconds',
-    //                 startValues: {minutes: time},
-    //                 target: {minutes: 0},
-    //                 countdown: true,
-    //                 updateWhenTargetAchieved: true
-    //             });
-    //         })
-            
     //     });
-    // }
 
-    // const [handleSeparateStart, setHandleSeparateStart] = useState(handleSimpleStart)
-
-
-    // useEffect(()=> {
-    //     if (intervals && !fiveMinBreak) {
-    //         setHandleSeparateStart(() => handleIntervalStart);
-    //     } else if (intervals && fiveMinBreak) {
-    //         setHandleSeparateStart(() => handleIntervalWithPauseStart);
-    //     } else {
-    //         setHandleSeparateStart(() => handleSimpleStart);
+    //     if(showTimeOpen){
+    //         setShowSetTime(false)
     //     }
-    // }, [intervals, fiveMinBreak]);
+    //     if()
 
-    // console.log(handleSeparateStart);
-    
+    //     timer.addEventListener('targetAchieved', handleWorkCompleted);
+    // };
+
+    // const handleWorkCompleted = () => {
+    //     // When work timer ends, initiate break if enabled
+    //     if (intervals && fiveMinBreak) {
+    //         setPauseOpen(true);
+    //         startBreakTimer();
+    //     } else if (intervals && !fiveMinBreak){
+    //         timer.reset()
+    //     } else {
+    //         setShowTimesUp(true);
+    //     }
+    // };
+
+    // const startBreakTimer = () => {
+    //     timer.removeEventListener('targetAchieved');
+    //     timer.start({
+    //         precision: 'seconds',
+    //         startValues: { minutes: 1 }, // Set to 5 for actual 5-min break
+    //         countdown: true,
+    //         target: { minutes: 0 },
+    //         updateWhenTargetAchieved: true
+    //     });
+
+    //     timer.addEventListener('targetAchieved', handleBreakCompleted);
+    // };
+
+    // const handleBreakCompleted = () => {
+    //     setPauseOpen(false);
+    //     startWorkTimer(); // Resume work timer after break
+    // };
 
     //Start function to handle start of timer 
     

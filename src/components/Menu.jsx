@@ -102,7 +102,6 @@ export default function Menu({analogOpen, digitalOpen, textOpen, showSetTime, ha
                     <li onClick={handleAnalogClick} className='hover:cursor-pointer'>ANALOG TIMER</li>
                     <li onClick={handleDigitalClick} className='hover:cursor-pointer'>DIGITAL TIMER</li>
                     <li onClick={handleTextClick} className='hover:cursor-pointer'>TEXT TIMER</li>
-                    <li>CIRCLES TIMER</li>
                 </ul>
             </motion.nav>
         ) : (
