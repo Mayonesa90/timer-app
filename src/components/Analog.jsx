@@ -35,7 +35,7 @@ export default function Analog({totalDurationInSeconds, countDown, handleAnalogO
                <img src={Clock} alt="clock" />
                 <motion.img 
                     src={Handle}
-                    className='absolute top-[3.5%] left-[49.55%]  '
+                    className='absolute top-[3.55%] left-[49.525%]  '
                     style={{ transformOrigin: 'bottom center' }}  
                     animate={{
                         rotate: rotation

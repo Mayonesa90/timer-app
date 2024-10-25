@@ -89,8 +89,8 @@ export default function Loading(){
               className='logo w-9 mx-auto mb-2' 
               initial={{opacity: 0.15}}
               animate={{
-                opacity: [1, 1, 1, 1, 0.15, 1, 1],  // Keyframes for opacity
-                scale: [1, 0.95, 1, 1, 1, 1, 1],     // Keyframes for scale
+                opacity: [1, 1, 1, 1, 1, 0.15, 0.15, 1, 1],  // Keyframes for opacity
+                scale: [1, 0.90, 1, 1, 1, 1, 1, 1, 1],     // Keyframes for scale
               }}
               transition={{
                 duration: 4,  // Total duration of the animation cycle

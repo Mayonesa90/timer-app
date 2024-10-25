@@ -17,7 +17,7 @@ export default function Text({hours, minutes, seconds, handleTextOpen, handleSto
        
         <main className='min-w-[375px]  mx-auto  bg-transparent flex flex-col items-center justify-center gap-y-16 relative'>
             <section className='flex gap-[42px] items-center max-w-[350px]'>
-                <h1 className=' font-PTSans text-[30px] font-semibold text-wrap'>
+                <h1 className=' font-PTSans text-[30px] font-semibold text-wrap text-gray-300'>
                     {hours === 1 ? `${hoursInText} hour` : null}
                     {hours > 1 ? `${hoursInText} hours` : null}
                     {minutes === 1 ? ` ${minutesInText} minute and` : null}

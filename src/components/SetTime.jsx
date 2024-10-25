@@ -14,13 +14,12 @@ export default function SetTimerPage(props){
           transition: { duration: 0.2, ease: "easeInOut" },
         },
       };
+        
 
     return (
         <>
             <motion.section 
                 className='flex gap-[42px] items-center'
-                // animation={{opacity: [0, 1]}}
-                // transition={{duration: 0.5, delay: 1}}
             >
                 
                 <motion.img 
@@ -61,7 +60,7 @@ export default function SetTimerPage(props){
                     />
                     <label htmlFor="intervals" className='text-gray-50 font-PTSans font-xs tracking-widest' >intervals</label>
                 </section>
-                <section className='flex gap-x-4'>
+                {props.intervals ?  <section className='flex gap-x-4'>
                     <input 
                         type="checkbox" 
                         name='break' 
@@ -69,7 +68,16 @@ export default function SetTimerPage(props){
                         onChange={props.handleFiveMinBreak}
                     />
                     <label htmlFor="break" className='text-gray-50 font-PTSans font-xs tracking-widest'>5 min break / interval</label>
-                </section>
+                </section> : <section className='flex gap-x-4'>
+                    <input 
+                        type="checkbox" 
+                        name='break' 
+                        id='break' 
+                        disabled={true}
+                    />
+                    <label htmlFor="break" className='text-gray-50 opacity-35 font-PTSans font-xs tracking-widest'>5 min break / interval</label>
+                </section>}
+               
                 <motion.button 
                     className='h-[51px] w-[279px] font-PTSans text-[24px] font-semibold tracking-widest border border-gray-900 rounded-md'
                     initial={{scale: 1}}

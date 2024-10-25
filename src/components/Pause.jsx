@@ -1,7 +1,13 @@
-import Alarm from '../assets/alarm.svg'
+import PauseImg from '../assets/pause.svg'
 import {motion} from 'framer-motion'
 
-export default function TimesUp({analogOpen, digitalOpen, textOpen, showSetTime, handleReset, handleAnalogOpen, handleSetTimeOpen, handleDigitalOpen, handleTextOpen}){
+export default function Pause(
+    {
+        handleTimeReset, 
+        handlePauseOpen, 
+        handleStart,  
+    }
+){
     
     const rippleVariants = {
         animate: {
@@ -19,20 +25,10 @@ export default function TimesUp({analogOpen, digitalOpen, textOpen, showSetTime,
     }
 
     const handleClick = () => {
-        handleReset()
-        handleSetTimeOpen()
+        handleTimeReset()
+        handlePauseOpen()
+        handleStart()
 
-        if (analogOpen){
-            handleAnalogOpen()
-        }
-
-        if(digitalOpen){
-            handleDigitalOpen()
-        }
-
-        if(textOpen){
-            handleTextOpen()
-        }
         
     }
 
@@ -63,16 +59,16 @@ export default function TimesUp({analogOpen, digitalOpen, textOpen, showSetTime,
                 animate={{opacity: [0, 1]}}
                 transition={{duration: 0.5, ease: 'easeIn'}}
             >
-                <motion.img animate='none' src={Alarm} className=' max-w-[85px]'/>
-                <p className=' text-[36px] text-gray-50 font-bold tracking-widest'>Times up!</p>
+                <motion.img animate='none' src={PauseImg} className='mt-[90px]'/>
+                <p className='mt-[36px] text-[36px] text-gray-50 font-bold tracking-widest'>Pause & breath</p>
                 <motion.button 
-                    className='h-[51px] w-[279px] font-PTSans text-[#ffffff99] text-[24px] font-semibold tracking-widest border border-[#ffffff99] rounded-md bg-transparent absolute transform -bottom-[100%]  '
+                    className='mt-[134] h-[51px] w-[279px] font-PTSans text-[#ffffff99] text-[24px] font-semibold tracking-widest border border-[#ffffff99] rounded-md bg-transparent absolute transform -bottom-[100%]  '
                     initial={{scale: 1}}
                     whileTap={{scale: 0.95}}
                     transition={{duration: 0.1, ease: 'easeIn'}}  
                     onClick={handleClick}      
             >
-                SET NEW TIMER
+                NO PAUSE, GO NOW!
             </motion.button>
             </motion.div>                  
         </div>

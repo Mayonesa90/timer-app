@@ -90,7 +90,7 @@ export default function Menu({analogOpen, digitalOpen, textOpen, showSetTime, ha
         <AnimatePresence>
         {menuOpen ? (
             <motion.nav 
-                className='hover:cursor-pointer menu-open z-40 min-w-[375px] h-full bg-gray-900 grid items-center justify-center absolute'
+                className='hover:cursor-pointer menu-open z-40 min-w-[374px] h-full bg-gray-900 grid items-center justify-center absolute'
                 key={'menu-open'}
                 initial='closed'
                 animate='open'
@@ -107,7 +107,7 @@ export default function Menu({analogOpen, digitalOpen, textOpen, showSetTime, ha
             </motion.nav>
         ) : (
             <motion.nav 
-                className='hover:cursor-pointer menu-closed min-w-[375px] bg-gray-50 shadow-2xl absolute top-3'
+                className='hover:cursor-pointer menu-closed min-w-[374px] bg-gray-50 shadow-2xl absolute top-3'
                 key={'menu-closed'}
                 initial='closed'
                 animate='open'
